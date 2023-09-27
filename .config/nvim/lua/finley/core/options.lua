@@ -12,8 +12,13 @@ opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 opt.smartindent = true
 
+-- Save undo history
+vim.o.undofile = true
+
 -- line wrapping
-opt.wrap = false -- disable line wrapping
+
+-- Enable break indent
+vim.o.breakindent = true
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
@@ -23,14 +28,22 @@ opt.incsearch = true
 
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
-
 opt.scrolloff = 8
 
 -- appearance
-
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = 'yes'
+
+-- Decrease update time
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -47,3 +60,15 @@ opt.swapfile = false
 --opt.undofile = true
 
 opt.colorcolumn = "80"
+
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})

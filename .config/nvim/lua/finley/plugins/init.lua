@@ -1,7 +1,14 @@
 return {
-  "nvim-lua/plenary.nvim", -- lua functions that many plugins use
+  -- This is where plugins that don't require any configuration go
 
-  "christoomey/vim-tmux-navigator", -- tmux & split window navigation
+  -- tmux & split window navigation
+  "christoomey/vim-tmux-navigator",
 
-  "inkarkat/vim-ReplaceWithRegister", -- replace with register contents using motion (gr + motion)
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
 }
